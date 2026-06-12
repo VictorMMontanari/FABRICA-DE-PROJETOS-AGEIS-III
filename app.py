@@ -31,7 +31,7 @@ st.set_page_config(
 @st.cache_resource
 def carregar_modelo():
     """Carrega o modelo treinado do arquivo .joblib"""
-    modelo_path = Path.cwd() / 'melhor_modelo_projeto9_v2.joblib'
+    modelo_path = Path.cwd() / 'projeto9_v2.joblib'
     
     if not modelo_path.exists():
         st.error(f"❌ Modelo não encontrado em {modelo_path}")

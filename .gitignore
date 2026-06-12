@@ -10,10 +10,6 @@ dataset/**
 *.csv
 /dataset
 
-# Ignorar modelos pesados
-*.joblib
-*.pkl
-
 # Sistema
 .DS_Store
 __pycache__/
