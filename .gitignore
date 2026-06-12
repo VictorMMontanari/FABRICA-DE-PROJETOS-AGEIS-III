@@ -1,0 +1,20 @@
+cat << EOF > .gitignore
+# Ambientes virtuais
+.venv/
+venv/
+ENV/
+
+# Ignorar completamente a pasta de datasets e qualquer arquivo CSV
+dataset/
+dataset/**
+*.csv
+/dataset
+
+# Ignorar modelos pesados
+*.joblib
+*.pkl
+
+# Sistema
+.DS_Store
+__pycache__/
+EOF

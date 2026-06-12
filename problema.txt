@@ -1,0 +1,20 @@
+### Proposta 9: Predição de Reincidência de Atendimento
+
+#### Objetivo
+Desenvolver um modelo de classificação que preveja se uma Ordem de Serviço (OS) terá novo atendimento para o *mesmo cliente e mesmo produto* em curto prazo após o fechamento.
+
+#### Problema Real
+Após o atendimento, parte dos clientes abre nova OS para o mesmo produto em pouco tempo, gerando custo adicional e indicando possível falha no diagnóstico ou na solução. Antecipar a chance de reincidência permite revisar o atendimento antes do fechamento ou priorizar acompanhamento.
+
+#### Dados Disponíveis
+- *Entrada (por OS fechada):* Produto, defeito constatado, solução, tipo de atendimento, posto, estado, tempo de resolução, datas de abertura/fechamento e *identificador anonimizado do consumidor* (consumidor_id_anonimo no export).
+- *Target:* Reincidiu = 1 se existir outra OS com mesmo consumidor anonimizado e mesmo produto, aberta após o fechamento desta OS e dentro da janela definida (ex.: 30, 60 ou 90 dias); caso contrário, 0.
+- *Requisito:* O export deve incluir consumidor_id_anonimo (hash do cliente + fábrica) para que o target seja calculável.
+
+#### Escopo Técnico
+- *Dataset:* 12–24 meses de OS *fechadas* (com data de fechamento).
+- *Target:* Classificação binária (Reincidiu / Não reincidiu), com janela de reincidência definida (ex.: 30, 60 ou 90 dias).
+- *Features (sugestão):* Produto (ou linha/família), defeito constatado, solução, tipo de atendimento, tempo de resolução, posto, estado, mês/dia da semana; opcionalmente indicadores agregados (ex.: histórico de reincidência do produto ou do posto).
+- *Modelos:* Logistic Regression, Decision Tree, Random Forest (opcionalmente XGBoost).
+- *Métricas:* Accuracy, Precision, Recall, F1-score; priorizar F1 e Recall na classe "Reincidiu" e analisar desbalanceamento (e curva ROC-AUC se aplicável).
+- *Validação:* Divisão temporal (treino em período anterior, teste em período mais recente).
